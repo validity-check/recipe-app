@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
 
 ## Reproduce
-To reproduce locally, you need to have [Node js](nodejs.org) installed. You also need to have the Angular CLI (Command Line Interface) installed (with `npm install @angular/cli -g`). Open a command prompt in the folder where the clone of this repo is extracted, and run `npm install`.
+To reproduce locally, you need to have [Node js](nodejs.org) installed. If you have [Git](https://git-scm.com), you can reproduce with `git clone https://github.com/validity-check/recipe-app`.You also need to have the Angular CLI (Command Line Interface) installed (with `npm install @angular/cli -g`). Open a command prompt in the folder where the clone of this repo is extracted, and run `npm install`.
 
 ## Development server
 
