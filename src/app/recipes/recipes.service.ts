@@ -10,26 +10,33 @@ import { Subject } from 'rxjs/internal/Subject';
 export class RecipeService {
     recipesChanged = new Subject<Recipe[]>();
 
-    private recipes: Recipe[] = [
-        new Recipe(
-            'First recipe',
-            'Your very first recipe! Edit and begin!',
-            'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_1280.jpg',
-            [
-                new Ingredient('CPH14', 1459693),
-                new Ingredient('ANZ112', 1280)
-            ]),
+    // private recipes: Recipe[] = [
+    //     new Recipe(
+    //         'First recipe',
+    //         'Your very first recipe! Edit and begin!',
+    //         'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_1280.jpg',
+    //         [
+    //             new Ingredient('CPH14', 1459693),
+    //             new Ingredient('ANZ112', 1280)
+    //         ]),
 
-        new Recipe(
-            'Second recipe',
-            'Your second recipe! Edit and begin!',
-            'https://live.staticflickr.com/65535/48395479791_61303e495e_n.jpg',
-            [
-                new Ingredient('CPH14', 65535),
-                new Ingredient('ANZ112', 48395479791)
-            ])];
+    //     new Recipe(
+    //         'Second recipe',
+    //         'Your second recipe! Edit and begin!',
+    //         'https://live.staticflickr.com/65535/48395479791_61303e495e_n.jpg',
+    //         [
+    //             new Ingredient('CPH14', 65535),
+    //             new Ingredient('ANZ112', 48395479791)
+    //         ])];
+
+    private recipes: Recipe[] = [];
 
     constructor(private shoppingListService: ShoppingListService) {}
+
+    setRecipes(recipes: Recipe[]) {
+      this.recipes = recipes;
+      this.recipesChanged.next(this.recipes.slice());
+    }
 
     getRecipes() {
         console.log(this.recipes.slice());
