@@ -17,11 +17,11 @@ export class AuthService {
     return this.http.post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDOLXWh6agFK-yQqlPKQTRqCMRQn_TVFNo',
       {
-        email: email,
-        password: password,
+        email,
+        password,
         returnSecureToken: true
       }
-    )
+    );
   }
 
 }
