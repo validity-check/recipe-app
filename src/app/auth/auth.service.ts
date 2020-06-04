@@ -30,9 +30,10 @@ export class AuthService {
         returnSecureToken: true
       }
     ).pipe(catchError(this.handleError),
-    tap(resData => {
-      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expriesIn);
-    }));
+      tap(resData => {
+        this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expriesIn);
+        console.log(resData.expriesIn);
+      }));
   }
 
   login(email: string, password: string) {
@@ -49,6 +50,31 @@ export class AuthService {
       }));
   }
 
+  autoLogin() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+      );
+
+    console.log(new Date(userData._tokenExpirationDate));
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      // console.log(loadedUser);
+    }
+  }
+
   logout() {
     this.user.next(null);
     this.router.navigate(['/auth']);
@@ -63,6 +89,7 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
   private handleError(errorRes: HttpErrorResponse) {
