@@ -46,7 +46,11 @@ export class AuthService {
       }
     ).pipe(catchError(this.handleError),
       tap(resData => {
-        this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expriesIn);
+        this.handleAuthentication(
+          resData.email,
+          resData.localId,
+          resData.idToken,
+          +resData.expriesIn);
       }));
   }
 
@@ -71,7 +75,6 @@ export class AuthService {
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
-      // console.log(loadedUser);
     }
   }
 
