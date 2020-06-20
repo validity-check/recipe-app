@@ -1,5 +1,5 @@
 {
-  "name": "course-project",
+  "name": "recipes-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
