@@ -7,7 +7,7 @@ import { Store } from "@ngrx/store";
 
 import { Ingredient } from "../shared/ingredient.model";
 
-import * as fromShoppingList from "./store/shopping-list.reducer";
+import * as fromApp from "../store/app.reducer";
 import * as ShoppingListActions from "./store/shopping-list.actions";
 
 @Component({
@@ -21,11 +21,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   constructor(
     // private shoppingListService: ShoppingListService,
-    private store: Store<fromShoppingList.AppState>
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
-    this.ingredients = this.store.select("shoppingList");
+    this.ingredients = this.store.select("shoppingListKey");
     // this.ingredients = this.shoppingListService.getIngredients();
     // this.subscription = this.shoppingListService.ingredientChanged
     //   .subscribe(
