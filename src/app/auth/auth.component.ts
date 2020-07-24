@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import { AuthService, AuthResponseData } from './auth.service';
+import { AuthService, AuthResponseData } from "./auth.service";
 
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html'
+  selector: "app-auth",
+  templateUrl: "./auth.component.html",
 })
 export class AuthComponent {
   loginMode = true;
@@ -38,11 +38,12 @@ export class AuthComponent {
       authObs = this.authService.signup(email, password);
     }
     authObs.subscribe(
-      resData => {
+      (resData) => {
         console.log(resData);
         this.loading = false;
-        this.router.navigate(['/recipes']);
-      }, errorMessage => {
+        this.router.navigate(["/recipes"]);
+      },
+      (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
         this.loading = false;

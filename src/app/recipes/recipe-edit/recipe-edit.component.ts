@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
 
-import { RecipeService } from '../recipes.service';
+import { RecipeService } from "../recipes.service";
 
 @Component({
-  selector: 'app-recipe-edit',
-  templateUrl: './recipe-edit.component.html',
-  styleUrls: ['./recipe-edit.component.css'],
+  selector: "app-recipe-edit",
+  templateUrl: "./recipe-edit.component.html",
+  styleUrls: ["./recipe-edit.component.css"],
 })
 export class RecipeEditComponent implements OnInit {
   id: number;
@@ -18,14 +18,14 @@ export class RecipeEditComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       // tslint:disable-next-line: no-string-literal
-      this.id = +params['id'];
+      this.id = +params["id"];
       // tslint:disable-next-line: no-string-literal
-      this.editMode = params['id'] != null;
+      this.editMode = params["id"] != null;
       this.initForm();
     });
   }
@@ -46,12 +46,12 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(["../"], { relativeTo: this.route });
   }
 
   onAddIngredient() {
     // tslint:disable-next-line: no-angle-bracket-type-assertion
-    (<FormArray> this.recipeForm.get('ingredients')).push(
+    (<FormArray>this.recipeForm.get("ingredients")).push(
       new FormGroup({
         // tslint:disable-next-line: object-literal-key-quotes
         name: new FormControl(null, Validators.required),
@@ -60,22 +60,23 @@ export class RecipeEditComponent implements OnInit {
           Validators.required,
           Validators.pattern(/^[1-9]+[0-9]*$/),
         ]),
-      }));
+      })
+    );
   }
 
   onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(["../"], { relativeTo: this.route });
   }
 
   onDeleteIngredient(index: number) {
     // tslint:disable-next-line: no-angle-bracket-type-assertion
-    (<FormArray> this.recipeForm.get('ingredients')).removeAt(index);
+    (<FormArray>this.recipeForm.get("ingredients")).removeAt(index);
   }
 
   private initForm() {
-    let recipeName = '';
-    let recipeImagePath = '';
-    let recipeDescription = '';
+    let recipeName = "";
+    let recipeImagePath = "";
+    let recipeDescription = "";
     // tslint:disable-next-line: prefer-const
     let recipeIngredients = new FormArray([]);
 
@@ -85,7 +86,7 @@ export class RecipeEditComponent implements OnInit {
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
       // tslint:disable-next-line: no-string-literal
-      if (recipe['ingredients']) {
+      if (recipe["ingredients"]) {
         // tslint:disable-next-line: prefer-const
         for (let ingredient of recipe.ingredients) {
           recipeIngredients.push(
@@ -118,6 +119,6 @@ export class RecipeEditComponent implements OnInit {
   get controls() {
     // a getter!
     // tslint:disable-next-line: no-angle-bracket-type-assertion
-    return (<FormArray> this.recipeForm.get('ingredients')).controls;
+    return (<FormArray>this.recipeForm.get("ingredients")).controls;
   }
 }

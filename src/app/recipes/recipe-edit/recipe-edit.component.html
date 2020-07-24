@@ -6,8 +6,13 @@
           <button
             type="submit"
             class="btn btn-success"
-            [disabled]="recipeForm.invalid">Save</button>
-          <button type="button" class="btn btn-danger"(click)="onCancel()">Cancel</button>
+            [disabled]="recipeForm.invalid"
+          >
+            Save
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">
+            Cancel
+          </button>
         </div>
       </div>
       <div class="row">
@@ -78,7 +83,10 @@
               <button
                 class="btn btn-danger"
                 type="button"
-                (click)="onDeleteIngredient(i)">X</button>
+                (click)="onDeleteIngredient(i)"
+              >
+                X
+              </button>
             </div>
           </div>
           <hr />
@@ -87,7 +95,8 @@
               <button
                 type="button"
                 class="btn btn-success"
-                (click)="onAddIngredient()">
+                (click)="onAddIngredient()"
+              >
                 Add Ingredient
               </button>
             </div>
