@@ -1,5 +1,4 @@
 import { Ingredient } from "../../shared/ingredient.model";
-
 import * as ShoppingListActions from "./shopping-list.actions";
 
 export interface State {
@@ -47,11 +46,11 @@ export function shoppingListReducer(
     case ShoppingListActions.DELETE_INGREDIENT:
       return {
         ...state,
-        ingredients: state.ingredients.filter(
-          (ig: Ingredient, igIndex: number) => {
-            return igIndex !== state.editedIngredientIndex;
-          }
-        ),
+        ingredients: state.ingredients.filter((ig, igIndex) => {
+          return igIndex !== state.editedIngredientIndex;
+        }),
+        editedIngredientIndex: -1,
+        editedIngredient: null,
       };
     case ShoppingListActions.START_EDIT:
       return {
