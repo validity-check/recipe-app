@@ -1,19 +1,15 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <h1>{{ loginMode ? "Log In" : "Sign Up" }}</h1>
-    <!-- Old aproach -- not wrong -->
-    <!-- <div class="alert alert-danger" *ngIf="error">
-      <p>{{ error }}</p>
-    </div> -->
+    <h1>{{ isLoginMode ? "Log In" : "Sign Up" }}</h1>
     <app-alert
       [message]="error"
       *ngIf="error"
       (close)="onHandleError()"
     ></app-alert>
-    <div *ngIf="loading" style="text-align: center;">
+    <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
     </div>
-    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!loading">
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
       <div class="form-group">
         <label for="email">E-Mail</label>
         <input
@@ -44,11 +40,11 @@
           type="submit"
           [disabled]="!authForm.valid"
         >
-          {{ loginMode ? "Login" : "Sign Up" }}
+          {{ isLoginMode ? "Login" : "Sign Up" }}
         </button>
         |
         <button class="btn btn-primary" (click)="onSwitchMode()" type="button">
-          Switch to {{ loginMode ? "Sign Up" : "Login" }}
+          Switch to {{ isLoginMode ? "Sign Up" : "Login" }}
         </button>
       </div>
     </form>
