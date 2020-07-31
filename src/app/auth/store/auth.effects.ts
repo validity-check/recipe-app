@@ -83,8 +83,8 @@ export class AuthEffects {
     })
   );
   @Effect()
-  authLogin = this.actions$.pipe(
-    ofType(AuthActions.LOGIN_START),
+  authRedirect = this.actions$.pipe(
+    ofType(AuthActions.LOGIN_START, AuthActions.LOGOUT),
     switchMap((authData: AuthActions.LoginStart) => {
       return this.http
         .post<AuthResponseData>(
