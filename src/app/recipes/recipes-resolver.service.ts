@@ -7,7 +7,6 @@ import {
 
 import { Recipe } from "./recipes.model";
 
-import { RecipeService } from "./recipes.service";
 import { Store } from "@ngrx/store";
 import * as fromApp from "../store/app.reducer";
 import * as RecipesActions from "./store/recipe.actions";

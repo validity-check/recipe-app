@@ -8,16 +8,13 @@ import { StoreRouterConnectingModule } from "@ngrx/router-store";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
-
-import * as fromApp from "./store/app.reducer";
-
-import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
+import { SharedModule } from "./shared/shared.module";
 import { CoreModule } from "./core.module";
+import * as fromApp from "./store/app.reducer";
 import { AuthEffects } from "./auth/store/auth.effects";
+import { environment } from "../environments/environment";
 import { RecipeEffects } from "./recipes/store/recipe.effects";
-
-import { environment } from "src/environments/environment";
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -33,5 +30,6 @@ import { environment } from "src/environments/environment";
     CoreModule,
   ],
   bootstrap: [AppComponent],
+  // providers: [LoggingService]
 })
 export class AppModule {}
