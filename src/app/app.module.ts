@@ -30,6 +30,5 @@ import { RecipeEffects } from "./recipes/store/recipe.effects";
     CoreModule,
   ],
   bootstrap: [AppComponent],
-  // providers: [LoggingService]
 })
 export class AppModule {}

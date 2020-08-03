@@ -59,6 +59,7 @@ const handleError = (errorRes: any) => {
 
 @Injectable()
 export class AuthEffects {
+  @Effect()
   authSignup = this.actions$.pipe(
     ofType(AuthActions.SIGNUP_START),
     switchMap((signupAction: AuthActions.SignupStart) => {
@@ -92,8 +93,8 @@ export class AuthEffects {
   );
 
   @Effect()
-  authSuccess = this.actions$.pipe(
-    ofType(AuthActions.LOGIN_START, AuthActions.LOGOUT),
+  authLogin = this.actions$.pipe(
+    ofType(AuthActions.LOGIN_START),
     switchMap((authData: AuthActions.LoginStart) => {
       return this.http
         .post<AuthResponseData>(
@@ -121,6 +122,16 @@ export class AuthEffects {
             return handleError(errorRes);
           })
         );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  authRedirect = this.actions$.pipe(
+    ofType(AuthActions.AUTHENTICATE_SUCCESS),
+    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+      if (authSuccessAction.payload.redirect) {
+        this.router.navigate(["/"]);
+      }
     })
   );
 
@@ -169,16 +180,6 @@ export class AuthEffects {
       this.authService.clearLogoutTimer();
       localStorage.removeItem("userData");
       this.router.navigate(["/auth"]);
-    })
-  );
-
-  @Effect({ dispatch: false })
-  authRedirect = this.actions$.pipe(
-    ofType(AuthActions.AUTHENTICATE_SUCCESS),
-    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
-      if (authSuccessAction.payload.redirect) {
-        this.router.navigate(["/"]);
-      }
     })
   );
 
